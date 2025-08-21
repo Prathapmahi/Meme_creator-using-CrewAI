@@ -1,0 +1,39 @@
+## task.yaml
+tasks:
+  - id: ideation_task
+    description: >
+      Based on the user's input or current trends, generate 3 creative meme concepts.
+      Each concept should include:
+      1. A brief description of the meme idea
+      2. The target audience/community that would appreciate it
+      3. The emotional response or message it aims to convey
+      
+      Format your response as a structured list of concepts.
+    agent: meme_ideator
+    expected_output: A list of 3 creative meme concepts with descriptions
+
+  - id: image_selection_task
+    description: >
+      Based on the selected meme concept, suggest the perfect image template.
+      Your response should include:
+      1. The name of the meme template
+      2. A brief description of why this template fits the concept
+      3. A direct URL to a usable version of this image OR a suggestion to use a placeholder
+      
+      If suggesting a well-known meme, provide specific details about the template.
+    agent: image_selector
+    context: [ideation_task]
+    expected_output: A meme template suggestion with description and source URL
+
+  - id: caption_task
+    description: >
+      Create the perfect text captions for the selected meme template and concept.
+      Your response should include:
+      1. Top text (if applicable)
+      2. Bottom text (if applicable)
+      3. A brief explanation of why these captions work well
+      
+      Ensure the text follows meme conventions and is appropriately concise and impactful.
+    agent: caption_writer
+    context: [ideation_task, image_selection_task]
+    expected_output: Top and bottom text captions for the meme
